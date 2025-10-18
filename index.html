@@ -1,0 +1,334 @@
+<!--
+Ultra-Premium Neon Portfolio — Single-file HTML template (Upgraded for Mr. Developer)
+Instructions:
+1. Save as `index.html` and open in a browser.
+2. Replace placeholder images / email / links as needed.
+3. Works offline — no external JS libraries required.
+4. For deployment: push to GitHub and enable GitHub Pages or deploy to Vercel/Netlify.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mr. Developer — Ultra Premium Portfolio</title>
+  <meta name="description" content="Mr. Developer — Web Dev, Design, Video Editing, AI. Ultra-premium neon portfolio." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-900: #04050a;
+      --bg-800: #071022;
+      --glass: rgba(255,255,255,0.04);
+      --muted: #9aa7bd;
+      --neon-c: #00f0ff;
+      --neon-p: #9b5cff;
+      --accent-grad: linear-gradient(90deg,var(--neon-c),var(--neon-p));
+      --card: rgba(255,255,255,0.03);
+      --radius:18px;
+      --max:1200px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color-scheme: dark;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:radial-gradient(800px 400px at 10% 10%, rgba(155,92,255,0.05), transparent 8%), radial-gradient(900px 500px at 90% 90%, rgba(0,240,255,0.03), transparent 8%), var(--bg-900);color:#eaf6ff;scroll-behavior:smooth}
+    a{color:inherit}
+    .container{max-width:var(--max);margin:36px auto;padding:28px}
+
+    /* PARTICLES + SOFT GLOW */
+    .scene{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.18;mix-blend-mode:screen}
+    .blob.c1{width:520px;height:520px;background:radial-gradient(circle,#9b5cff,#5b30ff);left:-10%;top:-8%}
+    .blob.c2{width:700px;height:700px;background:radial-gradient(circle,#00f0ff,#5bffc9);right:-15%;bottom:-10%}
+    .particle{position:absolute;width:6px;height:6px;border-radius:999px;background:linear-gradient(180deg,#fff,#9b5cff);opacity:0.6;animation:float 8s linear infinite}
+    @keyframes float{0%{transform:translateY(0) translateX(0) scale(1);}50%{transform:translateY(-60px) translateX(30px) scale(.9);}100%{transform:translateY(0) translateX(0) scale(1)}}
+
+    /* Header */
+    header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:64px;height:64px;border-radius:14px;background:var(--accent-grad);display:grid;place-items:center;font-weight:900;color:#020617;font-family:'Space Grotesk',sans-serif}
+    nav ul{display:flex;gap:18px;list-style:none}
+    nav a{padding:8px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:700}
+    nav a.cta{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.04);color:white}
+
+    /* HERO */
+    .hero{position:relative;display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;margin-top:18px;z-index:2}
+    .eyebrow{color:var(--neon-p);font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:13px}
+    h1{font-size:clamp(28px,6vw,48px);line-height:1.02;margin-top:8px}
+    .lead{color:var(--muted);margin-top:14px;max-width:64ch}
+
+    .hero-actions{display:flex;gap:12px;margin-top:20px}
+    .btn{padding:12px 18px;border-radius:12px;border:0;cursor:pointer;font-weight:800;letter-spacing:.3px}
+    .btn-primary{background:var(--accent-grad);color:#021021;box-shadow:0 8px 40px rgba(155,92,255,0.12), inset 0 -2px 12px rgba(0,0,0,0.35);transform:translateZ(0)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* GLASS CARD */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:20px;padding:20px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(0,0,0,0.65)}
+    .profile{display:flex;gap:16px;align-items:center}
+    .avatar{width:112px;height:112px;border-radius:16px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:grid;place-items:center;font-size:36px;font-weight:900;color:white}
+    .meta small{color:var(--muted)}
+
+    /* GLASS STROKE */
+    .glow-border{position:relative;border-radius:14px}
+    .glow-border:after{content:'';position:absolute;inset:-2px;background:linear-gradient(90deg,var(--neon-c),var(--neon-p));filter:blur(18px);opacity:0.6;border-radius:16px;z-index:-1}
+
+    /* Interests - premium cards */
+    .interests{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+    .interest{min-width:150px;flex:1 1 150px;padding:16px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.03);position:relative;overflow:hidden;cursor:default;transition:transform .35s cubic-bezier(.2,.9,.28,1), box-shadow .35s}
+    .interest:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(0,0,0,0.6)}
+    .interest .icon{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--neon-c),var(--neon-p));display:grid;place-items:center;font-weight:800;color:#021021;margin-bottom:8px}
+    .interest h4{margin-bottom:6px}
+    .interest p{font-size:13px;color:var(--muted)}
+
+    /* PROJECTS */
+    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .project{border-radius:12px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);min-height:180px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s ease, box-shadow .25s ease}
+    .project:hover{transform:translateY(-12px);box-shadow:0 30px 80px rgba(0,0,0,0.7)}
+    .project .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+
+    /* ABOUT & CONTACT */
+    .split{display:grid;grid-template-columns:1fr 380px;gap:22px;margin-top:30px}
+    .about{padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+    .bio p{color:var(--muted);line-height:1.6}
+
+    form{display:flex;flex-direction:column;gap:12px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:10px;color:#eaf6ff}
+
+    footer{color:var(--muted);text-align:center;margin:36px 0 12px}
+
+    /* Reveal animations */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease, transform .65s cubic-bezier(.2,.9,.28,1)}
+    .reveal.show{opacity:1;transform:none}
+
+    /* responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      .projects{grid-template-columns:repeat(2,1fr)}
+      .split{grid-template-columns:1fr}
+      nav ul{display:none}
+    }
+    @media (max-width:600px){
+      .projects{grid-template-columns:1fr}
+      .avatar{width:88px;height:88px}
+    }
+
+    /* subtle neon text */
+    .neon{color:var(--neon-c);text-shadow:0 8px 30px rgba(0,240,255,0.08), 0 0 26px rgba(155,92,255,0.04)}
+
+  </style>
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <div class="blob c1"></div>
+    <div class="blob c2"></div>
+    <!-- particles (randomized by JS below) -->
+    <div id="particles"></div>
+  </div>
+
+  <div class="container" id="page">
+    <header>
+      <div class="brand">
+        <div class="logo">AMR</div>
+        <div>
+          <div style="font-weight:900;font-size:18px">Mr. Developer</div>
+          <small style="color:var(--muted)">Creator • Designer • Engineer</small>
+        </div>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#interests">Interests</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact" class="cta">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow reveal">Neon • Ultra-Premium</div>
+          <h1 class="reveal">Hi, I'm <span class="neon">Mr. Developer AmeerMaviaRajput</span><br><small style="font-weight:600;color:var(--muted)">I build modern websites, craft elegant designs, and edit videos — powered by AI.</small></h1>
+
+          <p class="lead reveal">I combine Web Development, Web Designing, Video Editing and Artificial Intelligence to create polished digital experiences. I focus on performance, beautiful UI, and storytelling through motion.</p>
+
+          <div class="hero-actions reveal">
+            <button class="btn btn-primary">Hire Me</button>
+            <button class="btn btn-ghost">Download CV</button>
+          </div>
+
+          <div style="margin-top:18px">
+            <h3 class="reveal" style="margin-bottom:8px">Highlighted interests</h3>
+            <div class="interests" id="interests">
+
+              <div class="interest reveal">
+                <div class="icon">⚛️</div>
+                <h4>Web Development</h4>
+                <p>Modern JS, React, performance-first and accessible web apps.</p>
+              </div>
+
+              <div class="interest reveal">
+                <div class="icon">🎨</div>
+                <h4>Web Designing</h4>
+                <p>UI/UX, design systems and pixel-perfect interfaces.</p>
+              </div>
+
+              <div class="interest reveal">
+                <div class="icon">🎬</div>
+                <h4>Video Editing</h4>
+                <p>Promotional edits, motion graphics and storytelling sequences.</p>
+              </div>
+
+              <div class="interest reveal">
+                <div class="icon">🤖</div>
+                <h4>Artificial Intelligence</h4>
+                <p>AI-assisted workflows, prototypes and creative tools.</p>
+              </div>
+
+              <div class="interest reveal">
+                <div class="icon">✨</div>
+                <h4>Experimental</h4>
+                <p>Music, photography and web-based experiments.</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <aside class="card glow-border reveal">
+          <div class="profile">
+            <div class="avatar">MD</div>
+            <div class="meta">
+              <div style="font-weight:900">Mr. Developer</div>
+              <small>Web Developer • Designer • Video Editor • AI Enthusiast</small>
+              <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+                <span style="font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);">React</span>
+                <span style="font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);">Figma</span>
+                <span style="font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);">Premiere</span>
+                <span style="font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);">AI Tools</span>
+              </div>
+            </div>
+          </div>
+
+          <p style="margin-top:14px;color:var(--muted);line-height:1.5">
+            <strong>Bio</strong>
+            <br>
+            I’m a multidisciplinary creator blending technical craft and visual storytelling. I build performant web apps, design memorable interfaces, and edit videos that move audiences. I use AI to prototype faster and push creative boundaries.
+          </p>
+
+          <div style="display:flex;gap:10px;margin-top:16px">
+            <a class="btn btn-primary" href="#contact">Message</a>
+            <a class="btn btn-ghost" href="#projects">See Work</a>
+          </div>
+
+          <div style="margin-top:12px;color:var(--muted);font-size:13px">Based in Karachi • Available for freelance & remote projects</div>
+        </aside>
+      </section>
+
+      <section id="projects">
+        <h2 class="reveal" style="margin-top:28px">Selected Projects</h2>
+        <div class="projects">
+          <article class="project reveal">
+            <div>
+              <h3>Interactive Landing — SaaS</h3>
+              <p class="muted">Conversion-led landing with microinteractions and A/B-tested copy.</p>
+            </div>
+            <div class="tags"><span class="tag">React</span><span class="tag">UX</span></div>
+          </article>
+
+          <article class="project reveal">
+            <div>
+              <h3>Brand Experience</h3>
+              <p class="muted">Immersive microsite with motion-led storytelling and CMS integration.</p>
+            </div>
+            <div class="tags"><span class="tag">Design</span><span class="tag">Motion</span></div>
+          </article>
+
+          <article class="project reveal">
+            <div>
+              <h3>Promo Video Series</h3>
+              <p class="muted">High-impact promotional edits for product launch campaigns.</p>
+            </div>
+            <div class="tags"><span class="tag">Video</span><span class="tag">Editing</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="split" id="about">
+        <div class="about reveal">
+          <h2>About Me</h2>
+          <div class="bio">
+            <p>I’m Mr. Developer — a multidisciplinary creator who merges technical expertise with visual craft. I build fast, accessible web apps, design polished product UIs, and produce motion that tells a story. I use AI to iterate rapidly and to explore new ideas.</p>
+
+            <h3 style="margin-top:14px">What I do</h3>
+            <ul style="color:var(--muted);margin-top:8px">
+              <li>Develop responsive web apps and beautiful user interfaces</li>
+              <li>Design systems, prototypes, and high-fidelity visuals</li>
+              <li>Edit motion content and create promo videos</li>
+              <li>Experiment with AI for creative workflows</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="card reveal" id="contact">
+          <h3>Contact</h3>
+          <form onsubmit="event.preventDefault(); alert('Demo: message sent')">
+            <input type="text" placeholder="Your name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="text" placeholder="Subject">
+            <textarea placeholder="Tell me about your project" required></textarea>
+            <button class="btn btn-primary" type="submit">Send message</button>
+          </form>
+
+          <div style="margin-top:12px;color:var(--muted);font-size:13px">
+            Email: <strong style="color:var(--neon-c)">youremail@example.com</strong>
+            <div style="margin-top:8px">Based in Karachi • Available for remote work</div>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <a href="#" style="text-decoration:none;color:var(--muted)">Twitter</a>
+            <a href="#" style="text-decoration:none;color:var(--muted)">LinkedIn</a>
+            <a href="#" style="text-decoration:none;color:var(--muted)">GitHub</a>
+          </div>
+        </aside>
+      </section>
+
+      <footer>
+        © <span id="year"></span> Mr. Developer — Crafted with care.
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // YEAR
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // PARTICLES generator
+    const parts = document.getElementById('particles');
+    const count = 28;
+    for(let i=0;i<count;i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random()*100+'%';
+      p.style.top = Math.random()*100+'%';
+      p.style.animationDuration = 6 + Math.random()*8 + 's';
+      p.style.opacity = 0.2 + Math.random()*0.6;
+      parts.appendChild(p);
+    }
+
+    // Reveal on scroll (simple IntersectionObserver)
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('show');
+      });
+    },{threshold:0.12});
+
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  </script>
+</body>
+</html>
