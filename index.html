@@ -1,334 +1,1701 @@
-<!--
-Ultra-Premium Neon Portfolio — Single-file HTML template (Upgraded for Mr. Developer)
-Instructions:
-1. Save as `index.html` and open in a browser.
-2. Replace placeholder images / email / links as needed.
-3. Works offline — no external JS libraries required.
-4. For deployment: push to GitHub and enable GitHub Pages or deploy to Vercel/Netlify.
--->
+I'll create a modern, visually striking gaming accessories website with a dark theme, neon accents, and interactive elements perfect for gaming enthusiasts.
 
-<!doctype html>
+```html
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mr. Developer — Ultra Premium Portfolio</title>
-  <meta name="description" content="Mr. Developer — Web Dev, Design, Video Editing, AI. Ultra-premium neon portfolio." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone Pro - Premium Gaming Accessories</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+        :root {
+            --primary-color: #00ff88;
+            --secondary-color: #ff00ff;
+            --accent-color: #00d4ff;
+            --dark-bg: #0a0a0a;
+            --dark-secondary: #151515;
+            --dark-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            --neon-glow: 0 0 20px rgba(0, 255, 136, 0.5);
+            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
 
-  <style>
-    :root{
-      --bg-900: #04050a;
-      --bg-800: #071022;
-      --glass: rgba(255,255,255,0.04);
-      --muted: #9aa7bd;
-      --neon-c: #00f0ff;
-      --neon-p: #9b5cff;
-      --accent-grad: linear-gradient(90deg,var(--neon-c),var(--neon-p));
-      --card: rgba(255,255,255,0.03);
-      --radius:18px;
-      --max:1200px;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      color-scheme: dark;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;background:radial-gradient(800px 400px at 10% 10%, rgba(155,92,255,0.05), transparent 8%), radial-gradient(900px 500px at 90% 90%, rgba(0,240,255,0.03), transparent 8%), var(--bg-900);color:#eaf6ff;scroll-behavior:smooth}
-    a{color:inherit}
-    .container{max-width:var(--max);margin:36px auto;padding:28px}
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    /* PARTICLES + SOFT GLOW */
-    .scene{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-    .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.18;mix-blend-mode:screen}
-    .blob.c1{width:520px;height:520px;background:radial-gradient(circle,#9b5cff,#5b30ff);left:-10%;top:-8%}
-    .blob.c2{width:700px;height:700px;background:radial-gradient(circle,#00f0ff,#5bffc9);right:-15%;bottom:-10%}
-    .particle{position:absolute;width:6px;height:6px;border-radius:999px;background:linear-gradient(180deg,#fff,#9b5cff);opacity:0.6;animation:float 8s linear infinite}
-    @keyframes float{0%{transform:translateY(0) translateX(0) scale(1);}50%{transform:translateY(-60px) translateX(30px) scale(.9);}100%{transform:translateY(0) translateX(0) scale(1)}}
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(0, 255, 136, 0.1) 35px, rgba(0, 255, 136, 0.1) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255, 0, 255, 0.1) 35px, rgba(255, 0, 255, 0.1) 70px);
+            animation: bgMove 20s linear infinite;
+        }
 
-    /* Header */
-    header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:64px;height:64px;border-radius:14px;background:var(--accent-grad);display:grid;place-items:center;font-weight:900;color:#020617;font-family:'Space Grotesk',sans-serif}
-    nav ul{display:flex;gap:18px;list-style:none}
-    nav a{padding:8px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:700}
-    nav a.cta{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.04);color:white}
+        @keyframes bgMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
 
-    /* HERO */
-    .hero{position:relative;display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;margin-top:18px;z-index:2}
-    .eyebrow{color:var(--neon-p);font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:13px}
-    h1{font-size:clamp(28px,6vw,48px);line-height:1.02;margin-top:8px}
-    .lead{color:var(--muted);margin-top:14px;max-width:64ch}
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
 
-    .hero-actions{display:flex;gap:12px;margin-top:20px}
-    .btn{padding:12px 18px;border-radius:12px;border:0;cursor:pointer;font-weight:800;letter-spacing:.3px}
-    .btn-primary{background:var(--accent-grad);color:#021021;box-shadow:0 8px 40px rgba(155,92,255,0.12), inset 0 -2px 12px rgba(0,0,0,0.35);transform:translateZ(0)}
-    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-    /* GLASS CARD */
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:20px;padding:20px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(0,0,0,0.65)}
-    .profile{display:flex;gap:16px;align-items:center}
-    .avatar{width:112px;height:112px;border-radius:16px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:grid;place-items:center;font-size:36px;font-weight:900;color:white}
-    .meta small{color:var(--muted)}
+        .loader-content {
+            text-align: center;
+        }
 
-    /* GLASS STROKE */
-    .glow-border{position:relative;border-radius:14px}
-    .glow-border:after{content:'';position:absolute;inset:-2px;background:linear-gradient(90deg,var(--neon-c),var(--neon-p));filter:blur(18px);opacity:0.6;border-radius:16px;z-index:-1}
+        .loader-logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
 
-    /* Interests - premium cards */
-    .interests{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
-    .interest{min-width:150px;flex:1 1 150px;padding:16px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.03);position:relative;overflow:hidden;cursor:default;transition:transform .35s cubic-bezier(.2,.9,.28,1), box-shadow .35s}
-    .interest:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(0,0,0,0.6)}
-    .interest .icon{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--neon-c),var(--neon-p));display:grid;place-items:center;font-weight:800;color:#021021;margin-bottom:8px}
-    .interest h4{margin-bottom:6px}
-    .interest p{font-size:13px;color:var(--muted)}
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
 
-    /* PROJECTS */
-    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
-    .project{border-radius:12px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);min-height:180px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s ease, box-shadow .25s ease}
-    .project:hover{transform:translateY(-12px);box-shadow:0 30px 80px rgba(0,0,0,0.7)}
-    .project .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--dark-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
-    /* ABOUT & CONTACT */
-    .split{display:grid;grid-template-columns:1fr 380px;gap:22px;margin-top:30px}
-    .about{padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
-    .bio p{color:var(--muted);line-height:1.6}
+        .loader-progress {
+            height: 100%;
+            background: var(--gradient-2);
+            border-radius: 10px;
+            animation: loading 2s ease-in-out infinite;
+        }
 
-    form{display:flex;flex-direction:column;gap:12px}
-    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:10px;color:#eaf6ff}
+        @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 100%; }
+            100% { width: 0%; }
+        }
 
-    footer{color:var(--muted);text-align:center;margin:36px 0 12px}
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+            transition: all 0.3s ease;
+        }
 
-    /* Reveal animations */
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease, transform .65s cubic-bezier(.2,.9,.28,1)}
-    .reveal.show{opacity:1;transform:none}
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 255, 136, 0.1);
+        }
 
-    /* responsive */
-    @media (max-width:1000px){
-      .hero{grid-template-columns:1fr}
-      .projects{grid-template-columns:repeat(2,1fr)}
-      .split{grid-template-columns:1fr}
-      nav ul{display:none}
-    }
-    @media (max-width:600px){
-      .projects{grid-template-columns:1fr}
-      .avatar{width:88px;height:88px}
-    }
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    /* subtle neon text */
-    .neon{color:var(--neon-c);text-shadow:0 8px 30px rgba(0,240,255,0.08), 0 0 26px rgba(155,92,255,0.04)}
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-  </style>
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 3px 0;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%2300ff88" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .gradient-text {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-2);
+            color: var(--dark-bg);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-product {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background: var(--gradient-2);
+            border-radius: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.3);
+        }
+
+        .hero-product i {
+            font-size: 10rem;
+            color: var(--dark-bg);
+            opacity: 0.3;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .category-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.2);
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .category-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Featured Products */
+        .featured-products {
+            padding: 5rem 2rem;
+            background: var(--dark-secondary);
+        }
+
+        .products-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: var(--text-secondary);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-tab.active,
+        .filter-tab:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            z-index: 1;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image i {
+            font-size: 5rem;
+            color: var(--primary-color);
+            opacity: 0.3;
+        }
+
+        .product-actions {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .product-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #ffd700;
+        }
+
+        .rating-count {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .old-price {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+        }
+
+        .add-to-cart {
+            background: var(--gradient-2);
+            color: var(--dark-bg);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Special Offers */
+        .special-offers {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .offer-card {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .offer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .offer-tag {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .offer-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .offer-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .offer-timer {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timer-block {
+            background: var(--dark-card);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 60px;
+        }
+
+        .timer-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .timer-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* Brands */
+        .brands {
+            padding: 5rem 2rem;
+            background: var(--dark-secondary);
+        }
+
+        .brands-slider {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-top: 3rem;
+            max-width: 1400px;
+            margin: 3rem auto 0;
+        }
+
+        .brand-logo {
+            width: 150px;
+            height: 80px;
+            background: var(--dark-card);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .brand-logo:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.2);
+            color: var(--primary-color);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+        }
+
+        .newsletter-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            max-width: 500px;
+            margin: 2rem auto 0;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: var(--dark-card);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--dark-card);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+            color: var(--text-secondary);
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-method {
+            font-size: 2rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-bg);
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) rotate(360deg);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--dark-bg);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                border-top: 1px solid rgba(0, 255, 136, 0.1);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .category-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+    </style>
 </head>
 <body>
-  <div class="scene" aria-hidden="true">
-    <div class="blob c1"></div>
-    <div class="blob c2"></div>
-    <!-- particles (randomized by JS below) -->
-    <div id="particles"></div>
-  </div>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
 
-  <div class="container" id="page">
-    <header>
-      <div class="brand">
-        <div class="logo">AMR</div>
-        <div>
-          <div style="font-weight:900;font-size:18px">Mr. Developer</div>
-          <small style="color:var(--muted)">Creator • Designer • Engineer</small>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <i class="fas fa-gamepad"></i> GameZone
+            </div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
         </div>
-      </div>
+    </div>
 
-      <nav>
-        <ul>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#interests">Interests</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact" class="cta">Contact</a></li>
-        </ul>
-      </nav>
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <a href="#" class="logo">
+                <i class="fas fa-gamepad"></i>
+                GameZone Pro
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="#categories" class="nav-link">Categories</a></li>
+                <li><a href="#offers" class="nav-link">Offers</a></li>
+                <li><a href="#brands" class="nav-link">Brands</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="icon-btn">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="icon-btn">
+                    <i class="fas fa-heart"></i>
+                </button>
+                <button class="icon-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </button>
+                <div class="menu-toggle" id="menuToggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
     </header>
 
-    <main>
-      <section class="hero">
-        <div>
-          <div class="eyebrow reveal">Neon • Ultra-Premium</div>
-          <h1 class="reveal">Hi, I'm <span class="neon">Mr. Developer AmeerMaviaRajput</span><br><small style="font-weight:600;color:var(--muted)">I build modern websites, craft elegant designs, and edit videos — powered by AI.</small></h1>
-
-          <p class="lead reveal">I combine Web Development, Web Designing, Video Editing and Artificial Intelligence to create polished digital experiences. I focus on performance, beautiful UI, and storytelling through motion.</p>
-
-          <div class="hero-actions reveal">
-            <button class="btn btn-primary">Hire Me</button>
-            <button class="btn btn-ghost">Download CV</button>
-          </div>
-
-          <div style="margin-top:18px">
-            <h3 class="reveal" style="margin-bottom:8px">Highlighted interests</h3>
-            <div class="interests" id="interests">
-
-              <div class="interest reveal">
-                <div class="icon">⚛️</div>
-                <h4>Web Development</h4>
-                <p>Modern JS, React, performance-first and accessible web apps.</p>
-              </div>
-
-              <div class="interest reveal">
-                <div class="icon">🎨</div>
-                <h4>Web Designing</h4>
-                <p>UI/UX, design systems and pixel-perfect interfaces.</p>
-              </div>
-
-              <div class="interest reveal">
-                <div class="icon">🎬</div>
-                <h4>Video Editing</h4>
-                <p>Promotional edits, motion graphics and storytelling sequences.</p>
-              </div>
-
-              <div class="interest reveal">
-                <div class="icon">🤖</div>
-                <h4>Artificial Intelligence</h4>
-                <p>AI-assisted workflows, prototypes and creative tools.</p>
-              </div>
-
-              <div class="interest reveal">
-                <div class="icon">✨</div>
-                <h4>Experimental</h4>
-                <p>Music, photography and web-based experiments.</p>
-              </div>
-
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-text fade-in">
+                <h1>Level Up Your <span class="gradient-text">Gaming Experience</span></h1>
+                <p>Premium gaming accessories for elite gamers. Unleash your true potential with professional-grade equipment.</p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">
+                        <i class="fas fa-shopping-bag"></i> Shop Now
+                    </a>
+                    <a href="#offers" class="btn btn-secondary">
+                        <i class="fas fa-bolt"></i> View Deals
+                    </a>
+                </div>
             </div>
-          </div>
+            <div class="hero-image fade-in">
+                <div class="hero-product">
+                    <i class="fas fa-headset"></i>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <aside class="card glow-border reveal">
-          <div class="profile">
-            <div class="avatar">MD</div>
-            <div class="meta">
-              <div style="font-weight:900">Mr. Developer</div>
-              <small>Web Developer • Designer • Video Editor • AI Enthusiast</small>
-              <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-                <span style="font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);">React</span>
-                <span style="font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);">Figma</span>
-                <span style="font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);">Premiere</span>
-                <span style="font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);">AI Tools</span>
-              </div>
-            </div>
-          </div>
-
-          <p style="margin-top:14px;color:var(--muted);line-height:1.5">
-            <strong>Bio</strong>
-            <br>
-            I’m a multidisciplinary creator blending technical craft and visual storytelling. I build performant web apps, design memorable interfaces, and edit videos that move audiences. I use AI to prototype faster and push creative boundaries.
-          </p>
-
-          <div style="display:flex;gap:10px;margin-top:16px">
-            <a class="btn btn-primary" href="#contact">Message</a>
-            <a class="btn btn-ghost" href="#projects">See Work</a>
-          </div>
-
-          <div style="margin-top:12px;color:var(--muted);font-size:13px">Based in Karachi • Available for freelance & remote projects</div>
-        </aside>
-      </section>
-
-      <section id="projects">
-        <h2 class="reveal" style="margin-top:28px">Selected Projects</h2>
-        <div class="projects">
-          <article class="project reveal">
-            <div>
-              <h3>Interactive Landing — SaaS</h3>
-              <p class="muted">Conversion-led landing with microinteractions and A/B-tested copy.</p>
-            </div>
-            <div class="tags"><span class="tag">React</span><span class="tag">UX</span></div>
-          </article>
-
-          <article class="project reveal">
-            <div>
-              <h3>Brand Experience</h3>
-              <p class="muted">Immersive microsite with motion-led storytelling and CMS integration.</p>
-            </div>
-            <div class="tags"><span class="tag">Design</span><span class="tag">Motion</span></div>
-          </article>
-
-          <article class="project reveal">
-            <div>
-              <h3>Promo Video Series</h3>
-              <p class="muted">High-impact promotional edits for product launch campaigns.</p>
-            </div>
-            <div class="tags"><span class="tag">Video</span><span class="tag">Editing</span></div>
-          </article>
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="section-header fade-in">
+            <h2><span class="gradient-text">Shop by Category</span></h2>
+            <p>Find the perfect gear for your gaming setup</p>
         </div>
-      </section>
-
-      <section class="split" id="about">
-        <div class="about reveal">
-          <h2>About Me</h2>
-          <div class="bio">
-            <p>I’m Mr. Developer — a multidisciplinary creator who merges technical expertise with visual craft. I build fast, accessible web apps, design polished product UIs, and produce motion that tells a story. I use AI to iterate rapidly and to explore new ideas.</p>
-
-            <h3 style="margin-top:14px">What I do</h3>
-            <ul style="color:var(--muted);margin-top:8px">
-              <li>Develop responsive web apps and beautiful user interfaces</li>
-              <li>Design systems, prototypes, and high-fidelity visuals</li>
-              <li>Edit motion content and create promo videos</li>
-              <li>Experiment with AI for creative workflows</li>
-            </ul>
-          </div>
+        <div class="category-grid">
+            <div class="category-card fade-in">
+                <i class="fas fa-keyboard category-icon"></i>
+                <h3 class="category-name">Keyboards</h3>
+            </div>
+            <div class="category-card fade-in">
+                <i class="fas fa-mouse category-icon"></i>
+                <h3 class="category-name">Gaming Mice</h3>
+            </div>
+            <div class="category-card fade-in">
+                <i class="fas fa-headset category-icon"></i>
+                <h3 class="category-name">Headsets</h3>
+            </div>
+            <div class="category-card fade-in">
+                <i class="fas fa-gamepad category-icon"></i>
+                <h3 class="category-name">Controllers</h3>
+            </div>
+            <div class="category-card fade-in">
+                <i class="fas fa-desktop category-icon"></i>
+                <h3 class="category-name">Monitors</h3>
+            </div>
+            <div class="category-card fade-in">
+                <i class="fas fa-chair category-icon"></i>
+                <h3 class="category-name">Gaming Chairs</h3>
+            </div>
         </div>
+    </section>
 
-        <aside class="card reveal" id="contact">
-          <h3>Contact</h3>
-          <form onsubmit="event.preventDefault(); alert('Demo: message sent')">
-            <input type="text" placeholder="Your name" required>
-            <input type="email" placeholder="Email" required>
-            <input type="text" placeholder="Subject">
-            <textarea placeholder="Tell me about your project" required></textarea>
-            <button class="btn btn-primary" type="submit">Send message</button>
-          </form>
+    <!-- Featured Products -->
+    <section class="featured-products" id="products">
+        <div class="products-container">
+            <div class="section-header fade-in">
+                <h2><span class="gradient-text">Featured Products</span></h2>
+                <p>Top-rated gaming gear chosen by pro gamers</p>
+            </div>
+            
+            <div class="filter-tabs fade-in">
+                <button class="filter-tab active">All Products</button>
+                <button class="filter-tab">Best Sellers</button>
+                <button class="filter-tab">New Arrivals</button>
+                <button class="filter-tab">On Sale</button>
+            </div>
 
-          <div style="margin-top:12px;color:var(--muted);font-size:13px">
-            Email: <strong style="color:var(--neon-c)">youremail@example.com</strong>
-            <div style="margin-top:8px">Based in Karachi • Available for remote work</div>
-          </div>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card fade-in">
+                    <span class="product-badge">Hot</span>
+                    <div class="product-image">
+                        <i class="fas fa-keyboard"></i>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Keyboards</div>
+                        <h3 class="product-name">RGB Mechanical Gaming Keyboard</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(245)</span>
+                        </div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">$129.99</span>
+                                <span class="old-price">$179.99</span>
+                            </div>
+                            <button class="add-to-cart">Add</button>
+                        </div>
+                    </div>
+                </div>
 
-          <div style="display:flex;gap:10px;margin-top:12px">
-            <a href="#" style="text-decoration:none;color:var(--muted)">Twitter</a>
-            <a href="#" style="text-decoration:none;color:var(--muted)">LinkedIn</a>
-            <a href="#" style="text-decoration:none;color:var(--muted)">GitHub</a>
-          </div>
-        </aside>
-      </section>
+                <!-- Product 2 -->
+                <div class="product-card fade-in">
+                    <span class="product-badge">New</span>
+                    <div class="product-image">
+                        <i class="fas fa-mouse"></i>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Gaming Mice</div>
+                        <h3 class="product-name">Wireless Gaming Mouse Pro</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(189)</span>
+                        </div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">$89.99</span>
+                                <span class="old-price">$119.99</span>
+                            </div>
+                            <button class="add-to-cart">Add</button>
+                        </div>
+                    </div>
+                </div>
 
-      <footer>
-        © <span id="year"></span> Mr. Developer — Crafted with care.
-      </footer>
-    </main>
-  </div>
+                <!-- Product 3 -->
+                <div class="product-card fade-in">
+                    <span class="product-badge">-30%</span>
+                    <div class="product-image">
+                        <i class="fas fa-headset"></i>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Headsets</div>
+                        <h3 class="product-name">7.1 Surround Gaming Headset</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(342)</span>
+                        </div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">$149.99</span>
+                                <span class="old-price">$199.99</span>
+                            </div>
+                            <button class="add-to-cart">Add</button>
+                        </div>
+                    </div>
+                </div>
 
-  <script>
-    // YEAR
-    document.getElementById('year').textContent = new Date().getFullYear();
+                <!-- Product 4 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <i class="fas fa-gamepad"></i>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Controllers</div>
+                        <h3 class="product-name">Elite Wireless Controller</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(567)</span>
+                        </div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">$179.99</span>
+                            </div>
+                            <button class="add-to-cart">Add</button>
+                        </div>
+                    </div>
+                </div>
 
-    // PARTICLES generator
-    const parts = document.getElementById('particles');
-    const count = 28;
-    for(let i=0;i<count;i++){
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.style.left = Math.random()*100+'%';
-      p.style.top = Math.random()*100+'%';
-      p.style.animationDuration = 6 + Math.random()*8 + 's';
-      p.style.opacity = 0.2 + Math.random()*0.6;
-      parts.appendChild(p);
-    }
+                <!-- Product 5 -->
+                <div class="product-card fade-in">
+                    <span class="product-badge">Limited</span>
+                    <div class="product-image">
+                        <i class="fas fa-desktop"></i>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Monitors</div>
+                        <h3 class="product-name">27" 144Hz Gaming Monitor</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(423)</span>
+                        </div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">$399.99</span>
+                                <span class="old-price">$549.99</span>
+                            </div>
+                            <button class="add-to-cart">Add</button>
+                        </div>
+                    </div>
+                </div>
 
-    // Reveal on scroll (simple IntersectionObserver)
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting) entry.target.classList.add('show');
-      });
-    },{threshold:0.12});
+                <!-- Product 6 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <i class="fas fa-chair"></i>
+                        <div class="product-actions">
+                            <button class="action-btn"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Gaming Chairs</div>
+                        <h3 class="product-name">Ergonomic Racing Chair</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(298)</span>
+                        </div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">$299.99</span>
+                            </div>
+                            <button class="add-to-cart">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    <!-- Special Offers -->
+    <section class="special-offers" id="offers">
+        <div class="section-header fade-in">
+            <h2><span class="gradient-text">Special Offers</span></h2>
+            <p>Limited time deals you don't want to miss</p>
+        </div>
+        <div class="offers-grid">
+            <div class="offer-card fade-in">
+                <div class="offer-content">
+                    <span class="offer-tag">Flash Sale</span>
+                    <h3 class="offer-title">Weekend Special</h3>
+                    <p class="offer-description">Get up to 50% off on selected gaming keyboards and mice</p>
+                    <div class="offer-timer">
+                        <div class="timer-block">
+                            <div class="timer-value" id="days">02</div>
+                            <div class="timer-label">Days</div>
+                        </div>
+                        <div class="timer-block">
+                            <div class="timer-value" id="hours">15</div>
+                            <div class="timer-label">Hours</div>
+                        </div>
+                        <div class="timer-block">
+                            <div class="timer-value" id="minutes">34</div>
+                            <div class="timer-label">Mins</div>
+                        </div>
+                        <div class="timer-block">
+                            <div class="timer-value" id="seconds">52</div>
+                            <div class="timer-label">Secs</div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+            <div class="offer-card fade-in">
+                <div class="offer-content">
+                    <span class="offer-tag">Bundle Deal</span>
+                    <h3 class="offer-title">Ultimate Gaming Setup</h3>
+                    <p class="offer-description">Complete gaming bundle with keyboard, mouse, headset & mousepad</p>
+                    <div class="offer-price" style="font-size: 2rem; color: var(--primary-color); margin: 1rem 0;">
+                        $599.99 <span style="text-decoration: line-through; color: var(--text-secondary); font-size: 1.2rem;">$599.99</span>
+                    </div>
+                    <a href="#" class="btn btn-primary">Get Bundle</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  </script>
+    <!-- Brands Section -->
+    <section class="brands" id="brands">
+        <div class="section-header fade-in">
+            <h2><span class="gradient-text">Our Partners</span></h2>
+            <p>We work with the best gaming brands in the industry</p>
+        </div>
+        <div class="brands-slider">
+            <div class="brand-logo fade-in">RAZER</div>
+            <div class="brand-logo fade-in">LOGITECH</div>
+            <div class="brand-logo fade-in">CORSAIR</div>
+            <div class="brand-logo fade-in">STEELSERIES</div>
+            <div class="brand-logo fade-in">HYPERX</div>
+            <div class="brand-logo fade-in">ASUS ROG</div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-content fade-in">
+            <h2><span class="gradient-text">Join the Gaming Elite</span></h2>
+            <p>Subscribe to get exclusive deals, new product launches, and gaming tips</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GameZone Pro</h3>
+                <p>Your ultimate destination for premium gaming accessories. Level up your game with professional-grade equipment.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitch"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Sale Items</a></li>
+                    <li><a href="#">Gaming PCs</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Warranty</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Gaming Street, GZ City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> support@gamezone.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-8PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GameZone Pro. All Rights Reserved.</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa payment-method"></i>
+                <i class="fab fa-cc-mastercard payment-method"></i>
+                <i class="fab fa-cc-paypal payment-method"></i>
+                <i class="fab fa-cc-amex payment-method"></i>
+                <i class="fab fa-bitcoin payment-method"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-rocket"></i>
+    </div>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Mobile Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Countdown Timer
+        function updateCountdown() {
+            const endDate = new Date();
+            endDate.setDate(endDate.getDate() + 2);
+            endDate.setHours(23, 59, 59, 999);
+
+            const now = new Date().getTime();
+            const distance = endDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Fade In Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Filter Tabs
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // Add to Cart
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const cartCount = document.querySelector('.cart-count');
+                let count = parseInt(cartCount.textContent);
+                cartCount.textContent = count + 1;
+                
+                // Animation
+                btn.textContent = 'Added!';
+                btn.style.background = 'var(--primary-color)';
+                setTimeout(() => {
+                    btn.textContent = 'Add';
+                    btn.style.background = '';
+                }, 1000);
+            });
+        });
+
+        // Newsletter Form
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for subscribing! Check your email for exclusive offers.');
+            e.target.reset();
+        });
+
+        // Product Actions
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const icon = btn.querySelector('i');
+                if (icon.classList.contains('fa-heart')) {
+                    icon.classList.toggle('fas');
+                    icon.classList.toggle('far');
+                    btn.style.background = icon.classList.contains('fas') ? 'var(--secondary-color)' : '';
+                }
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
+
